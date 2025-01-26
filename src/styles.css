@@ -1,0 +1,12 @@
+#chess-board {
+    border: 1px solid black;
+    height: 1000px;
+    width: 1000px;
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.black {
+    background-color: black;
+}
