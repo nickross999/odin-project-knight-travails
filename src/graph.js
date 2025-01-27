@@ -53,7 +53,10 @@ export default class Graph {
       [null, null, null, null, null, null, null, null], //once the endPoint is reached, the function will
       [null, null, null, null, null, null, null, null], //retrace its steps using this array
     ];
-
+    previousArr[startPoint[1]][startPoint[0]] = {
+      position: startPoint,
+      parent: null
+    }
     while (queueArr.length !== 0) {
       let currentPosition = queueArr.shift();
       let currentNode = this.nodeList[currentPosition[1]][currentPosition[0]]; //log the current node
@@ -61,16 +64,16 @@ export default class Graph {
       if (!currentNode.visited) {
         //if this node has already been visited, we dont need to check it again
         currentNode.visited = true; //if it hasn't, mark it as visited
-        for (let coordinates in currentNode.potentialMoves) {
+        for (let index in currentNode.potentialMoves) {
           //for each neighboring node...
           let nextNode =
-            this.nodeList[currentNode.potentialMoves[coordinates][1]][
-              currentNode.potentialMoves[coordinates][0]
+            this.nodeList[currentNode.potentialMoves[index][1]][
+              currentNode.potentialMoves[index][0]
             ];
 
           if (
-            previousArr[currentNode.potentialMoves[coordinates][1]][
-              currentNode.potentialMoves[coordinates][0]
+            previousArr[currentNode.potentialMoves[index][1]][
+              currentNode.potentialMoves[index][0]
             ] === null
           ) {
             //log the neighboring node into previousArr if it doesnt already exist
@@ -80,20 +83,22 @@ export default class Graph {
             };
 
             if (
-              currentNode.potentialMoves[coordinates][0] === endPoint[0] &&
-              currentNode.potentialMoves[coordinates][1] === endPoint[1]
+              currentNode.potentialMoves[index][0] === endPoint[0] &&
+              currentNode.potentialMoves[index][1] === endPoint[1]
             ) {
               //if we reach the destination, clear the queue and break the loop
               queueArr = [];
               break;
             }
           }
-          queueArr.push(currentNode.potentialMoves[coordinates]);
+          queueArr.push(currentNode.potentialMoves[index]);
         }
       }
     }
+    console.log(previousArr);
     let pathArr = []; //this function returns an array of the path to the destination
     let currentItem = previousArr[endPoint[1]][endPoint[0]];
+    console.log(currentItem);
     while (
       currentItem.position[0] !== startPoint[0] ||
       currentItem.position[1] !== startPoint[1]

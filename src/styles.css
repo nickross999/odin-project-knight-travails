@@ -1,12 +1,43 @@
 #chess-board {
+    margin: 0 auto;
     border: 1px solid black;
-    height: 1000px;
-    width: 1000px;
+    height: 75vh;
+    width: 75vh;
+    max-height: 1000px;
+    max-width: 1000px;
     display: grid;
     grid-template-rows: repeat(8, 1fr);
     grid-template-columns: repeat(8, 1fr);
+    box-shadow: 1px 1px 5px 1px black;
+}
+
+#instructions {
+    margin: 0 auto;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#path {
+    text-align: center;
+    font-size: 1em;
+}
+
+#find-path-btn {
+    margin: 0 auto;
 }
 
 .black {
     background-color: black;
+}
+
+.start {
+    background-color: red;
+}
+
+.end {
+    background-color: green;
+}
+
+.stop {
+    background-color: burlywood;
 }
